@@ -1,7 +1,16 @@
-.componente {
-  background-color: darkolivegreen;
-  color: white;
-  border: 1px solid white;
+.login {
+  background-color: rgb(var(--loja-blue-rgb));
+  border: 1px solid rgb(var(--loja-light-grey-rgb));
   border-radius: 25px;
-  font-size: 20px;
+  font-size: 1.2rem;
+  height: 3rem;
+  width: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.loginIcon {
+  font-size: 3rem;
 }

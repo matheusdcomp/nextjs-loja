@@ -1,23 +1,46 @@
 import styles from "./page.module.css";
-import Componente from "./ui/componente";
+import Image from 'next/image';
+import Link from 'next/link';
+
+import Login from "./ui/login";
 
 export default function Template({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  children
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <div className={styles.main}>
+    <main className={styles.main}>
+
       <div className={styles.topo}>
-        <h1>Título da Página</h1>
-        <Componente nome="Matheus" />
+        <div>
+          <Image
+            src="/loja.png"
+            alt="Loja Exemplo"
+            width={50}
+            height={50}
+          />
+        </div>
+        <div><h1>Loja Exemplo</h1></div>
+        <Login />
       </div>
+
+      <div className={styles.mainmenu}>
+        <ul>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/entidades/clientes">Clientes</Link></li>
+          <li><Link href="/entidades/produtos">Produtos</Link></li>
+          <li><Link href="/entidades/vendas">Vendas</Link></li>
+        </ul>
+      </div>
+
       <div className={styles.centro}>
         {children}
       </div>
+
       <div className={styles.rodape}>
-        <p>RODAPÉ</p>
+        <p>Copyrigt © Matheus Viana. Loja Exemplo</p>
       </div>
-    </div>
+    </main>
   );
-} 
+}
