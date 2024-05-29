@@ -4,9 +4,10 @@
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 220, 220, 220;
   --background-end-rgb: 255, 255, 255;
   --loja-blue-rgb: 58, 58, 197;
+  --loja-light-blue-rgb: 120, 120, 220;
   --loja-light-grey-rgb: 190, 190, 220;
 
 }
@@ -39,9 +40,7 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  background-color: rgb(var(--background-end-rgb));
 }
 
 a {

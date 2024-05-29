@@ -3,11 +3,13 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <Image
-      src="/loja.png"
-      alt="Loja Exemplo"
-      width={300}
-      height={300}
-    />
+    <div className={styles.home}>
+      <Image
+        src="/loja.png"
+        alt="Loja Exemplo"
+        width={300}
+        height={300}
+      />
+    </div>
   );
 }
