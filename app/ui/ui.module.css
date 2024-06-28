@@ -20,6 +20,31 @@
   border: 1px solid rgb(var(--loja-light-blue-rgb));
 }
 
+.formularioCRUDBotoes {
+  background-color: rgb(var(--loja-blue-rgb));
+  color: rgb(var(--loja-light-grey-rgb));
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+}
+
+.formularioCRUDBotoes button {
+  font-size: 60%;
+  font-weight: bold;
+  height: 70%;
+  width: 10%;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.formularioPainel {
+  display: none;
+}
+
 .formularioForm {
   display: flex;
   flex-direction: column;
@@ -46,7 +71,7 @@
   width: 50%;
 }
 
-.formularioPainelInf {
+.formularioConf {
   font-size: 1.5rem;
   display: flex;
   flex-direction: row;
@@ -55,28 +80,7 @@
   height: 5vh;
 }
 
-.formularioPainelInf input {
-  font-size: 60%;
-  font-weight: bold;
-  height: 70%;
-  width: 10%;
-  margin: 0 1rem;
-  cursor: pointer;
-}
-
-.formularioPainelSup {
-  background-color: rgb(var(--loja-blue-rgb));
-  color: rgb(var(--loja-light-grey-rgb));
-  font-family: var(--font-mono);
-  font-size: 1.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 5vh;
-}
-
-.formularioPainelSup button {
+.formularioConf button {
   font-size: 60%;
   font-weight: bold;
   height: 70%;

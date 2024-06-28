@@ -28,9 +28,9 @@ export default function Template({
       <div className={styles.mainmenu}>
         <ul>
           <li><Link href="/">Home</Link></li>
-          <li><Link href="/entidades/clientes">Clientes</Link></li>
-          <li><Link href="/entidades/produtos">Produtos</Link></li>
-          <li><Link href="/entidades/vendas">Vendas</Link></li>
+          <li><Link href="/clientes">Clientes</Link></li>
+          <li><Link href="/produtos">Produtos</Link></li>
+          <li><Link href="vendas">Vendas</Link></li>
         </ul>
       </div>
 
