@@ -6,14 +6,14 @@ export default function Tabela({ entidadeUIProps }: { entidadeUIProps: EntidadeU
 
   const ths = (
     <tr>
-      <th><input type="checkbox" name="seltodos" id="seltodos" /></th>
+      <th><input type="checkbox" name="checktodos" id="checktodos" /></th>
       {entidadeUIProps[0].map(eup => <th>{eup.rotulo}</th>)}
     </tr>
   );
 
   const tds = entidadeUIProps.map(eups => (
     <tr>
-      <td><input type="checkbox" name={`sel${eups[0].nome}`} id={`sel${eups[0].nome}`} /></td>
+      <td><input type="checkbox" name={`check${eups[0].valor}`} id={`check${eups[0].valor}`} /></td>
       {eups.map(eup => <td>{eup.valor}</td>)}
     </tr>
   ));

@@ -15,10 +15,10 @@ export default function Clientes() {
     new EntidadeUIProps("Nome", "text", "nome", c.nome),
     new EntidadeUIProps("Email", "email", "email", c.email),
   ]);
-
-  const campos = ["Id", "Nome", "Email"];
-  const valores = clientes.map(c => [c.id.toString(), c.nome, c.email]);
-
+  /*
+    const campos = ["Id", "Nome", "Email"];
+    const valores = clientes.map(c => [c.id.toString(), c.nome, c.email]);
+  */
   return (
     <div className={styles.entidade}>
       <h1>Clientes</h1>
