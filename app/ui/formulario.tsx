@@ -83,6 +83,13 @@ export default function Formulario({
     mostrarFormulario("none");
   }
 
+  if (!entidadeUIProps || entidadeUIProps.length < 1) {
+    return (
+      <div className={styles.formularioDiv}>
+      </div>
+    );
+  }
+
   const inputs = entidadeUIProps.map(ipt => (
     <label>
       <span>{ipt.rotulo + ":"}</span>

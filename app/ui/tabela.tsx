@@ -14,6 +14,17 @@ export default function Tabela({ entidadeUIProps }: { entidadeUIProps: EntidadeU
     }
   }
 
+  if (!entidadeUIProps || entidadeUIProps.length < 1) {
+    return (
+      <div className={styles.tabeladiv}>
+        <table id="tabelaCRUD" className={styles.tabela}>
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    );
+  }
+
   const ths = (
     <tr>
       <th><input type="checkbox" name="seltodos" id="seltodos" onChange={cliqueCheckTodos} /></th>

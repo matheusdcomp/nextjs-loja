@@ -1,4 +1,6 @@
+
 import Entidade from "./entidade";
+import fs from "fs";
 
 export class Cliente extends Entidade {
 
@@ -13,27 +15,34 @@ export class Cliente extends Entidade {
 
 }
 
-const clientes: Cliente[] = [
-  new Cliente(1, "Matheus", "matheus@ufsj.edu.br"),
-  new Cliente(2, "João", "joao@ufsj.edu.br"),
-  new Cliente(3, "Maria", "maria@ufsj.edu.br"),
-  new Cliente(4, "José", "jose@ufsj.edu.br"),
-  new Cliente(5, "Lucas", "lucas@ufsj.edu.br"),
-  new Cliente(6, "William", "william@ufsj.edu.br"),
-  new Cliente(7, "Artur", "artur@ufsj.edu.br"),
-  new Cliente(8, "Ana", "ana@ufsj.edu.br"),
-  new Cliente(9, "Cláudia", "claudia@ufsj.edu.br"),
-  new Cliente(10, "Karla", "karla@ufsj.edu.br"),
-];
 
-export function obterTodosClientes() {
-  return clientes;
+const arquivo = "/data/clientes.json";
+
+
+export function obterTodosClientes(): Cliente[] {
+  const arq = fs.readFileSync(process.cwd() + arquivo, "utf8");
+  return JSON.parse(arq);
 }
 
 export function obterClientesPorNome(nome: string) {
-  return clientes.filter(c => c.nome.match(nome));
+  return obterTodosClientes().filter(c => c.nome.match(nome));
 }
 
 export function obterCliente(id: number) {
-  return clientes.find(c => c.id == id);
+  return obterTodosClientes().find(t => t.id == id);
+}
+
+export function inserirCliente(cliente: Cliente): boolean {
+  const lista = obterTodosClientes();
+  lista.push(cliente);
+  try {
+    const arq = fs.writeFileSync(
+      process.cwd() + arquivo,
+      JSON.stringify(lista),
+      'utf8');
+    return true;
+  }
+  catch (e) {
+    return false;
+  }
 }
