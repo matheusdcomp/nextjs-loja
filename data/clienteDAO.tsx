@@ -1,39 +1,25 @@
-
-import Entidade from "./entidade";
+import Cliente from "@/app/(entidades)/cliente/cliente";
 import fs from "fs";
-
-export class Cliente extends Entidade {
-
-  nome: string;
-  email: string;
-
-  constructor(id: number = 0, nome: string = "", email: string = "") {
-    super(id);
-    this.nome = nome;
-    this.email = email;
-  }
-
-}
 
 
 const arquivo = "/data/clientes.json";
 
 
-export function obterTodosClientes(): Cliente[] {
+export function obterClientes(): Cliente[] {
   const arq = fs.readFileSync(process.cwd() + arquivo, "utf8");
   return JSON.parse(arq);
 }
 
 export function obterClientesPorNome(nome: string) {
-  return obterTodosClientes().filter(c => c.nome.match(nome));
+  return obterClientes().filter(c => c.nome.match(nome));
 }
 
 export function obterCliente(id: number) {
-  return obterTodosClientes().find(t => t.id == id);
+  return obterClientes().find(t => t.id == id);
 }
 
 export function inserirCliente(cliente: Cliente): boolean {
-  const lista = obterTodosClientes();
+  const lista = obterClientes();
   lista.push(cliente);
   try {
     const arq = fs.writeFileSync(

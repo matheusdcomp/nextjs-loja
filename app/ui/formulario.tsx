@@ -72,22 +72,17 @@ export default function Formulario({
     inputs.forEach(i => valores.push(i.value));
 
     if (estado == "adicionando") funAdicionar(valores);
-    else if (estado == "adicionando") funEditar(valores);
+    else if (estado == "editando") funEditar(valores);
 
     limparFormulario();
     mostrarFormulario("none");
+    setEstado("parado");
   }
 
   function cliqueCancelar() {
     limparFormulario();
     mostrarFormulario("none");
-  }
-
-  if (!entidadeUIProps || entidadeUIProps.length < 1) {
-    return (
-      <div className={styles.formularioDiv}>
-      </div>
-    );
+    setEstado("parado");
   }
 
   const inputs = entidadeUIProps.map(ipt => (
