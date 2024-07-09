@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: right;
   font-family: var(--font-mono);
   color: rgb(var(--foreground-rgb));
@@ -21,7 +21,7 @@
 .formularioForm {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   margin-top: 1rem;
   padding: 1rem 1rem 0rem;
