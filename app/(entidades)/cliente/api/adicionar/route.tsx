@@ -13,8 +13,8 @@ export async function GET(request: Request) {
 
   if (id && nome && email) {
     return Response.json({
-      resposta: inserirCliente(new Cliente(Number(id), nome, email))
+      mensagem: inserirCliente(new Cliente(Number(id), nome, email))
     });
   }
-  else return Response.json({ resposta: false });
+  else return Response.json({ mensagem: false });
 }

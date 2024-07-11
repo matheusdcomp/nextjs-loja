@@ -19,8 +19,44 @@ export function obterCliente(id: number) {
 }
 
 export function inserirCliente(cliente: Cliente): boolean {
+
   const lista = obterClientes();
   lista.push(cliente);
+
+  try {
+    const arq = fs.writeFileSync(
+      process.cwd() + arquivo,
+      JSON.stringify(lista),
+      'utf8');
+    return true;
+  }
+  catch (e) {
+    return false;
+  }
+}
+
+export function editarCliente(cliente: Cliente): boolean {
+
+  const lista = obterClientes().map(
+    c => c.id == cliente.id ? cliente : c
+  );
+
+  try {
+    const arq = fs.writeFileSync(
+      process.cwd() + arquivo,
+      JSON.stringify(lista),
+      'utf8');
+    return true;
+  }
+  catch (e) {
+    return false;
+  }
+}
+
+export function removerCliente(id: number): boolean {
+
+  const lista = obterClientes().filter(c => c.id != id);
+
   try {
     const arq = fs.writeFileSync(
       process.cwd() + arquivo,

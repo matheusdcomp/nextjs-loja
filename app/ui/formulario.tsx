@@ -21,8 +21,16 @@ export default function Formulario({
 
   const [estado, setEstado] = useState("parado");
 
-  function mostrarFormulario(display: "block" | "none") {
-    document.getElementById("formularioPainel")!.style.display = display;
+  function abrirFormulario(estado: "adicionando" | "editando") {
+    limparFormulario();
+    document.getElementById("formularioPainel")!.style.display = "block";
+    setEstado(estado);
+  }
+
+  function fecharFormulario() {
+    limparFormulario();
+    document.getElementById("formularioPainel")!.style.display = "none";
+    setEstado("parado");
   }
 
   function limparFormulario() {
@@ -31,21 +39,13 @@ export default function Formulario({
     inputs.forEach(i => i.value = "");
   }
 
-  function cliqueAdicionar() {
-    setEstado("adicionando");
-    limparFormulario();
-    mostrarFormulario("block");
-  }
-
   function cliqueEditar() {
 
-    setEstado("editando");
+    abrirFormulario("editando");
 
     const valores = obterSelecionadas(true);
     if (valores.length == 0)
       alert("Selecione uma entidade na tabela.");
-
-    mostrarFormulario("block");
 
     const inputs: NodeListOf<HTMLInputElement> =
       document.querySelectorAll("#formularioPainel form input");
@@ -60,7 +60,7 @@ export default function Formulario({
     if (valores.length == 0)
       alert("Selecione uma entidade na tabela.");
 
-    funRemover(Number(valores[0][0]));
+    funRemover(Number(valores[0][0])).then((msn) => alert(msn));
   }
 
   function cliqueConfirmar() {
@@ -71,18 +71,13 @@ export default function Formulario({
 
     inputs.forEach(i => valores.push(i.value));
 
-    if (estado == "adicionando") funAdicionar(valores);
-    else if (estado == "editando") funEditar(valores);
+    if (estado == "adicionando") {
+      funAdicionar(valores).then((msn) => alert(msn));
+    }
+    else if (estado == "editando")
+      funEditar(valores).then((msn) => alert(msn));
 
-    limparFormulario();
-    mostrarFormulario("none");
-    setEstado("parado");
-  }
-
-  function cliqueCancelar() {
-    limparFormulario();
-    mostrarFormulario("none");
-    setEstado("parado");
+    fecharFormulario();
   }
 
   const inputs = entidadeUIProps.map(ipt => (
@@ -100,7 +95,7 @@ export default function Formulario({
   return (
     <div className={styles.formularioDiv}>
       <div className={styles.formularioCRUDBotoes}>
-        <button onClick={cliqueAdicionar}>Adicionar</button>
+        <button onClick={() => abrirFormulario("adicionando")}>Adicionar</button>
         <button onClick={cliqueEditar}>Editar</button>
         <button onClick={cliqueRemover}>Remover</button>
       </div>
@@ -110,7 +105,7 @@ export default function Formulario({
         </form>
         <div className={styles.formularioConf}>
           <button onClick={cliqueConfirmar}>Confirmar</button>
-          <button onClick={cliqueCancelar}>Cancelar</button>
+          <button onClick={fecharFormulario}>Cancelar</button>
         </div>
       </div>
     </div>
