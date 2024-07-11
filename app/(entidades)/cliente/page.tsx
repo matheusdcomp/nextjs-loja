@@ -17,7 +17,9 @@ export default function Clientes() {
     fetcher
   );
 
-  const clientes = data ? data.sort((a, b) => a.id - b.id) : [new Cliente()];
+  const clientes = data && data.length > 0 ?
+    data.sort((a, b) => a.id - b.id) :
+    [new Cliente()];
 
   const clientesUIProps: EntidadeUIProps[][] = clientes.map(c => [
     new EntidadeUIProps("Id", "text", "id", c.id.toString()),

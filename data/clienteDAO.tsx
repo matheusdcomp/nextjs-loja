@@ -53,6 +53,7 @@ export function editarCliente(cliente: Cliente): boolean {
   }
 }
 
+
 export function removerCliente(id: number): boolean {
 
   const lista = obterClientes().filter(c => c.id != id);
