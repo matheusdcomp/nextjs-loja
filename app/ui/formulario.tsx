@@ -60,7 +60,7 @@ export default function Formulario({
     if (valores.length == 0)
       alert("Selecione uma entidade na tabela.");
 
-    funRemover(Number(valores[0][0])).then((msn) => alert(msn));
+    funRemover(Number(valores[0][0])).then(msn => alert(msn));
   }
 
   function cliqueConfirmar() {
@@ -72,10 +72,10 @@ export default function Formulario({
     inputs.forEach(i => valores.push(i.value));
 
     if (estado == "adicionando") {
-      funAdicionar(valores).then((msn) => alert(msn));
+      funAdicionar(valores).then(msn => alert(msn));
     }
     else if (estado == "editando")
-      funEditar(valores).then((msn) => alert(msn));
+      funEditar(valores).then(msn => alert(msn));
 
     fecharFormulario();
   }

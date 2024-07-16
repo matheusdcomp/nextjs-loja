@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const [id, nome, email] = [
     searchParams.get('id'),
     searchParams.get('nome'),
-    searchParams.get('nome')
+    searchParams.get('email')
   ];
 
   if (id && nome && email) {

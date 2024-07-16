@@ -22,7 +22,7 @@ export async function editarCliente(props: string[]) {
     `{"id":"${props[0]}", "nome":"${props[1]}", "email":"${props[2]}"}`
   );
 
-  if (res.resposta) {
+  if (res.mensagem) {
     return `O cliente com ID: ${props[1]} foi editado.`;
   }
   else {
@@ -37,7 +37,7 @@ export async function removerCliente(id: number) {
     `{"id":"${id}"}`
   );
 
-  if (res.resposta) {
+  if (res.mensagem) {
     return `O cliente com ID: ${id} foi removido.`;
   }
   else {

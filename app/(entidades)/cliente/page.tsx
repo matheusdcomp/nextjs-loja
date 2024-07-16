@@ -12,10 +12,28 @@ export default function Clientes() {
 
   const fetcher = (url: string) => fetch(url).then((res => res.json()));
 
-  const { data }: { data: Cliente[] } = useSWR(
+  const { data, error, isLoading } = useSWR<Cliente[]>(
     'http://localhost:3000/cliente/api/todos',
     fetcher
   );
+
+  if (isLoading) {
+    return (
+      <div className={styles.entidade}>
+        <h1>Clientes</h1>
+        <h1>Carregando...</h1>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.entidade}>
+        <h1>Clientes</h1>
+        <h1>Error ao carregar os clientes.</h1>
+      </div>
+    );
+  }
 
   const clientes = data && data.length > 0 ?
     data.sort((a, b) => a.id - b.id) :
