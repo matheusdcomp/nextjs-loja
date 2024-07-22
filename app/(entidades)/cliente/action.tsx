@@ -1,47 +1,88 @@
-'use server'
+"use server"
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
 
-export async function adicionarCliente(props: string[]) {
+
+export async function adicionarCliente(prevState: any, formData: FormData) {
+
+  const schema = z.object({
+    id: z.string().min(1),
+    nome: z.string().min(1),
+    email: z.string().min(1),
+  });
+
+  const parse = schema.safeParse({
+    id: formData.get("id"),
+    nome: formData.get("nome"),
+    email: formData.get("email"),
+  });
+
+  if (!parse.success) {
+    return { mensagem: "Falha ao adicionar o cliente a partir dos dados do formulário." }
+  }
+
+  const cliente = parse.data;
 
   const res = await get(
-    "http://localhost:3000/cliente/api/adicionar" +
-    `?id=${props[0]}&nome=${props[1]}&email=${props[2]}`
+    "http://localhost:3000/cliente/api/adc" +
+    `?id=${cliente.id}&nome=${cliente.nome}&email=${cliente.email}`
   );
 
   if (res.mensagem) {
-    return `Novo cliente adicionado: ${props[1]}`;
+    revalidatePath("/cliente");
+    return { mensagem: `Novo cliente adicionado: ${cliente.nome}` };
   }
   else {
-    return `Não foi possível adicionar o cliente: ${props[1]}`;
+    return { mensagem: `Não foi possível adicionar o cliente: ${cliente.nome}` };
   }
 }
 
-export async function editarCliente(props: string[]) {
+export async function editarCliente(prevState: any, formData: FormData) {
+
+  const schema = z.object({
+    id: z.string().min(1),
+    nome: z.string().min(1),
+    email: z.string().min(1),
+  });
+
+  const parse = schema.safeParse({
+    id: formData.get("id"),
+    nome: formData.get("nome"),
+    email: formData.get("email"),
+  });
+
+  if (!parse.success) {
+    return { mensagem: "Falha ao editar o cliente a partir dos dados do formulário." }
+  }
+
+  const cliente = parse.data;
 
   const res = await post(
-    'http://localhost:3000/cliente/api/editar',
-    `{"id":"${props[0]}", "nome":"${props[1]}", "email":"${props[2]}"}`
+    "http://localhost:3000/cliente/api/edt",
+    `{"id":"${cliente.id}", "nome":"${cliente.nome}", "email":"${cliente.email}"}`
   );
 
   if (res.mensagem) {
-    return `O cliente com ID: ${props[1]} foi editado.`;
+    revalidatePath("/cliente");
+    return { mensagem: `O cliente com ID: ${cliente.id} foi editado.` };
   }
   else {
-    return `Não foi possível editar o cliente com ID: ${props[0]}`;
+    return { mensagem: `Não foi possível editar o cliente com ID: ${cliente.id}` };
   }
 }
 
 export async function removerCliente(id: number) {
 
   const res = await post(
-    "http://localhost:3000/cliente/api/remover",
+    "http://localhost:3000/cliente/api/rmv",
     `{"id":"${id}"}`
   );
 
   if (res.mensagem) {
-    return `O cliente com ID: ${id} foi removido.`;
+    return { mensagem: `O cliente com ID: ${id} foi removido.` };
   }
   else {
-    return `Não foi possível remover o cliente com ID: ${id}`;
+    return { mensagem: `Não foi possível remover o cliente com ID: ${id}` };
   }
 }
 
@@ -52,10 +93,10 @@ async function get(url: string) {
 
 async function post(url: string, obj: string) {
 
-  const res = await fetch(url, { method: 'POST', body: obj });
+  const res = await fetch(url, { method: "POST", body: obj });
 
   if (!res.ok) {
-    throw new Error('Falha em executar a ação do formulário.');
+    throw new Error("Falha em executar a ação do formulário.");
   }
   return res.json();
 }

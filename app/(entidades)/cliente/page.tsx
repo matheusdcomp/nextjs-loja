@@ -3,18 +3,19 @@ import useSWR from "swr";
 import EntidadeUIProps from "@/app/(entidades)/entidadeuiprops";
 import Cliente from "@/app/(entidades)/cliente/cliente";
 import styles from "@/app/(entidades)/entidades.module.css";
-import Tabela from "@/app/ui/tabela";
-import Formulario from "@/app/ui/formulario";
-import { adicionarCliente, editarCliente, removerCliente } from "@/app/(entidades)/cliente/action";
+import Tabela, { obterSelecionadas } from "@/app/ui/tabela";
+import PainelCRUD from "@/app/ui/painelcrud";
+import { useRouter } from "next/navigation";
+import { removerCliente } from "./action";
 
 
 export default function Clientes() {
 
-  const fetcher = (url: string) => fetch(url).then((res => res.json()));
+  const router = useRouter();
 
   const { data, error, isLoading } = useSWR<Cliente[]>(
-    'http://localhost:3000/cliente/api/todos',
-    fetcher
+    'http://localhost:3000/cliente/api/obt',
+    (url: string) => fetch(url).then((res => res.json()))
   );
 
   if (isLoading) {
@@ -49,12 +50,20 @@ export default function Clientes() {
     <div className={styles.entidade}>
       <h1>Clientes</h1>
       <Tabela entidadeUIProps={clientesUIProps} />
-      <Formulario
-        entidadeUIProps={clientesUIProps[0]}
-        funAdicionar={adicionarCliente}
-        funEditar={editarCliente}
-        funRemover={removerCliente}
+      <PainelCRUD
+        adicionar={() => router.push("/cliente/forms/adc")}
+        editar={() => router.push("/cliente/forms/edt/" + obterSelecionadas(true)[0][0])}
+        remover={cliqueRemover}
       />
     </div>
   );
+}
+
+function cliqueRemover() {
+
+  const valores = obterSelecionadas(true);
+  if (valores.length == 0)
+    alert("Selecione uma entidade na tabela.");
+
+  removerCliente(Number(valores[0][0])).then(msn => alert(msn.mensagem));
 }
