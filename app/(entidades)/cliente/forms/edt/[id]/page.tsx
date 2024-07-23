@@ -2,15 +2,19 @@
 import styles from "@/app/ui/ui.module.css";
 import Cliente from "@/app/(entidades)/cliente/cliente";
 import { editarCliente } from "@/app/(entidades)/cliente/action";
+import SubmitButton from "@/app/ui/submitbutton";
 
 import Link from "next/link";
 import useSWR from "swr";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 
 
 export default function FormEdtCliente({ params }: { params: { id: number } }) {
 
-  const [state, formAction] = useFormState(editarCliente, estadoInicial);
+  const [state, formAction] = useFormState(
+    editarCliente,
+    { mensagem: "" }
+  );
 
   const { data, error } = useSWR<Cliente>(
     `http://localhost:3000/cliente/api/obi?id=${params.id}`,
@@ -45,15 +49,33 @@ export default function FormEdtCliente({ params }: { params: { id: number } }) {
       <form className={styles.formularioForm} action={formAction}>
         <label>
           <span>Id:</span>
-          <input type="text" id="iptclienteid" name="id" defaultValue={data.id} required />
+          <input
+            type="text"
+            id="iptclienteid"
+            name="id"
+            defaultValue={data.id}
+            required
+          />
         </label>
         <label>
           <span>Nome:</span>
-          <input type="text" id="iptclientenome" name="nome" defaultValue={data.nome} required />
+          <input
+            type="text"
+            id="iptclientenome"
+            name="nome"
+            defaultValue={data.nome}
+            required
+          />
         </label>
         <label>
           <span>Email:</span>
-          <input type="text" id="iptclienteemail" name="email" defaultValue={data.email} required />
+          <input
+            type="text"
+            id="iptclienteemail"
+            name="email"
+            defaultValue={data.email}
+            required
+          />
         </label>
         <div className={styles.formularioPainel}>
           <SubmitButton />
@@ -67,18 +89,4 @@ export default function FormEdtCliente({ params }: { params: { id: number } }) {
       </form>
     </div>
   );
-}
-
-const estadoInicial = {
-  mensagem: '',
-}
-
-function SubmitButton() {
-
-  const { pending } = useFormStatus();
-
-  return (
-    <button type="submit" aria-disabled={pending} >Confirmar</button>
-  );
-
 }

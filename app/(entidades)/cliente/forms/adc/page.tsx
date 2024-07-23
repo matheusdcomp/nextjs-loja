@@ -1,14 +1,18 @@
 'use client'
 import styles from "@/app/ui/ui.module.css";
 import { adicionarCliente } from "@/app/(entidades)/cliente/action";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import SubmitButton from "@/app/ui/submitbutton";
 
 import Link from "next/link";
 
 
 export default function FormAdcCliente() {
 
-  const [state, formAction] = useFormState(adicionarCliente, estadoInicial);
+  const [state, formAction] = useFormState(
+    adicionarCliente,
+    { mensagem: "" }
+  );
 
   return (
     <div className={styles.formularioDiv}>
@@ -16,15 +20,30 @@ export default function FormAdcCliente() {
       <form className={styles.formularioForm} action={formAction}>
         <label>
           <span>Id:</span>
-          <input type="text" id="iptclienteid" name="id" required />
+          <input
+            type="text"
+            id="iptclienteid"
+            name="id"
+            required
+          />
         </label>
         <label>
           <span>Nome:</span>
-          <input type="text" id="iptclientenome" name="nome" required />
+          <input
+            type="text"
+            id="iptclientenome"
+            name="nome"
+            required
+          />
         </label>
         <label>
           <span>Email:</span>
-          <input type="text" id="iptclienteemail" name="email" required />
+          <input
+            type="text"
+            id="iptclienteemail"
+            name="email"
+            required
+          />
         </label>
         <div className={styles.formularioPainel}>
           <SubmitButton />
@@ -38,18 +57,4 @@ export default function FormAdcCliente() {
       </form>
     </div>
   );
-}
-
-const estadoInicial = {
-  mensagem: '',
-}
-
-function SubmitButton() {
-
-  const { pending } = useFormStatus();
-
-  return (
-    <button type="submit" aria-disabled={pending} >Confirmar</button>
-  );
-
 }
