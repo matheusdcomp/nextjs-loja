@@ -1,6 +1,5 @@
 'use client'
 import useSWR from "swr";
-import EntidadeUIProps from "@/app/(entidades)/entidadeuiprops";
 import Cliente from "@/app/(entidades)/cliente/cliente";
 import styles from "@/app/(entidades)/entidades.module.css";
 import Tabela, { obterSelecionadas } from "@/app/ui/tabela";
@@ -40,16 +39,13 @@ export default function Clientes() {
     data.sort((a, b) => a.id - b.id) :
     [new Cliente()];
 
-  const clientesUIProps: EntidadeUIProps[][] = clientes.map(c => [
-    new EntidadeUIProps("Id", "text", "id", c.id.toString()),
-    new EntidadeUIProps("Nome", "text", "nome", c.nome),
-    new EntidadeUIProps("Email", "email", "email", c.email),
-  ]);
+  const cabecalho = ["Id", "Nome", "Email"];
+  const linhas = clientes.map(c => [c.id.toString(), c.nome, c.email]);
 
   return (
     <div className={styles.entidade}>
       <h1>Clientes</h1>
-      <Tabela entidadeUIProps={clientesUIProps} />
+      <Tabela cabecalho={cabecalho} linhas={linhas} />
       <PainelCRUD
         adicionar={() => router.push("/cliente/forms/adc")}
         editar={() => router.push("/cliente/forms/edt/" + obterSelecionadas(true)[0][0])}

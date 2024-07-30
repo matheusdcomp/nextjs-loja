@@ -1,8 +1,7 @@
 'use client'
 import styles from "./ui.module.css";
-import EntidadeUIProps from "../(entidades)/entidadeuiprops";
 
-export default function Tabela({ entidadeUIProps }: { entidadeUIProps: EntidadeUIProps[][] }) {
+export default function Tabela({ cabecalho, linhas }: { cabecalho: string[], linhas: string[][] }) {
 
   function cliqueCheckTodos() {
 
@@ -10,21 +9,21 @@ export default function Tabela({ entidadeUIProps }: { entidadeUIProps: EntidadeU
       document.querySelectorAll("#tabelaCRUD tbody input[type='checkbox']");
 
     for (let i = 0; i < checks.length; i++) {
-      checks[i].checked = document.getElementById("seltodos")!.checked;
+      checks[i].checked = (document.getElementById("seltodos")! as HTMLInputElement).checked;
     }
   }
 
   const ths = (
     <tr>
       <th><input type="checkbox" name="seltodos" id="seltodos" onChange={cliqueCheckTodos} /></th>
-      {entidadeUIProps[0].map(eup => <th>{eup.rotulo}</th>)}
+      {cabecalho.map(col => <th>{col}</th>)}
     </tr>
   );
 
-  const tds = entidadeUIProps.map(eups => (
+  const tds = linhas.map(lnh => (
     <tr>
-      <td><input type="checkbox" name={`sel${eups[0].valor}`} id={`sel${eups[0].valor}`} /></td>
-      {eups.map(eup => <td>{eup.valor}</td>)}
+      <td><input type="checkbox" name={`sel${lnh[0]}`} id={`sel${lnh[0]}`} /></td>
+      {lnh.map(col => <td>{col}</td>)}
     </tr>
   ));
 
@@ -51,7 +50,9 @@ export function obterSelecionadas(apenasUm: boolean) {
 
   for (let t = 0; t < trs.length; t++) {
 
-    if (trs[t].cells[0].children[0].checked) {
+    const checkbox = trs[t].cells[0].children[0] as HTMLInputElement;
+
+    if (checkbox.checked) {
 
       let entidade: string[] = [];
 
