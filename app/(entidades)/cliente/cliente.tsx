@@ -1,4 +1,3 @@
-
 import Entidade from "@/app/(entidades)/entidade";
 
 export default class Cliente extends Entidade {

@@ -23,9 +23,9 @@ export async function adicionarCliente(prevState: any, formData: FormData) {
 
   const cliente = parse.data;
 
-  const res = await get(
-    "http://localhost:3000/cliente/api/adc" +
-    `?id=${cliente.id}&nome=${cliente.nome}&email=${cliente.email}`
+  const res = await post(
+    "http://localhost:3000/cliente/api/adc",
+    `{"id":"${cliente.id}", "nome":"${cliente.nome}", "email":"${cliente.email}"}`
   );
 
   if (res.mensagem) {
@@ -84,11 +84,6 @@ export async function removerCliente(id: number) {
   else {
     return { mensagem: `Não foi possível remover o cliente com ID: ${id}` };
   }
-}
-
-async function get(url: string) {
-  const res = await fetch(url);
-  return res.json();
 }
 
 async function post(url: string, obj: string) {

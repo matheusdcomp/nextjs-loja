@@ -1,19 +1,17 @@
-import Cliente from "@/app/(entidades)/cliente/cliente";
 import { inserirCliente } from "@/data/clienteDAO";
+import Cliente from "@/app/(entidades)/cliente/cliente";
 
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
 
-  const { searchParams } = new URL(request.url);
-  const [id, nome, email] = [
-    searchParams.get('id'),
-    searchParams.get('nome'),
-    searchParams.get('email')
-  ];
+  const res = await request.json();
+  const id = res.id;
+  const nome = res.nome;
+  const email = res.email;
 
   if (id && nome && email) {
     return Response.json({
-      mensagem: inserirCliente(new Cliente(Number(id), nome, email))
+      mensagem: await inserirCliente(new Cliente(Number(id), nome, email))
     });
   }
   else return Response.json({ mensagem: false });

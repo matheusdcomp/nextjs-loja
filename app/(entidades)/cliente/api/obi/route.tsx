@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const id = searchParams.get('id');
 
   if (id) {
-    return Response.json(obterCliente(Number(id)));
+    return Response.json(await obterCliente(Number(id)));
   }
   else return Response.json({ id: false });
 }

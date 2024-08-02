@@ -1,5 +1,5 @@
-import Cliente from "@/app/(entidades)/cliente/cliente";
 import { editarCliente } from "@/data/clienteDAO";
+import Cliente from "@/app/(entidades)/cliente/cliente";
 
 
 export async function POST(request: Request) {
@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
   if (id && nome && email) {
     return Response.json({
-      mensagem: editarCliente(new Cliente(Number(id), nome, email))
+      mensagem: await editarCliente(new Cliente(Number(id), nome, email))
     });
   }
   else return Response.json({ mensagem: false });

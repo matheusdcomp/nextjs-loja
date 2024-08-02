@@ -1,9 +1,11 @@
 'use client'
-import useSWR from "swr";
-import Cliente from "@/app/(entidades)/cliente/cliente";
 import styles from "@/app/(entidades)/entidades.module.css";
+
+import Cliente from "@/app/(entidades)/cliente/cliente";
 import Tabela, { obterSelecionadas } from "@/app/ui/tabela";
 import PainelCRUD from "@/app/ui/painelcrud";
+
+import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import { removerCliente } from "./action";
 

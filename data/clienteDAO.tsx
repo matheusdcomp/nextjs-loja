@@ -1,71 +1,66 @@
-import Cliente from "@/app/(entidades)/cliente/cliente";
-import fs from "fs";
+import { PrismaClient, Cliente } from "prisma/prisma-client";
+
+const prisma = new PrismaClient();
 
 
-const arquivo = "/data/clientes.json";
-
-
-export function obterClientes(): Cliente[] {
-  const arq = fs.readFileSync(process.cwd() + arquivo, "utf8");
-  return JSON.parse(arq);
+export async function obterClientes(): Promise<Cliente[]> {
+  return await prisma.cliente.findMany();
 }
 
-export function obterClientesPorNome(nome: string) {
-  return obterClientes().filter(c => c.nome.match(nome));
+export async function obterClientePorNome(nome: string): Promise<Cliente> {
+
+  const cliente = await prisma.cliente.findFirst({
+    where: {
+      nome: nome
+    }
+  });
+
+  return cliente ?? { id: 0, nome: "", email: "" };
 }
 
-export function obterCliente(id: number) {
-  return obterClientes().find(t => t.id == id);
+export async function obterCliente(id: number): Promise<Cliente> {
+
+  const cliente = await prisma.cliente.findUnique({
+    where: {
+      id: id
+    }
+  });
+
+  return cliente ?? { id: 0, nome: "", email: "" };
 }
 
-export function inserirCliente(cliente: Cliente): boolean {
+export async function inserirCliente(cliente: Cliente): Promise<boolean> {
 
-  const lista = obterClientes();
-  lista.push(cliente);
+  const novoCliente = await prisma.cliente.create({
+    data: cliente
+  });
 
-  try {
-    const arq = fs.writeFileSync(
-      process.cwd() + arquivo,
-      JSON.stringify(lista),
-      'utf8');
-    return true;
-  }
-  catch (e) {
-    return false;
-  }
+  return novoCliente.id === cliente.id;
 }
 
-export function editarCliente(cliente: Cliente): boolean {
+export async function editarCliente(cliente: Cliente): Promise<boolean> {
 
-  const lista = obterClientes().map(
-    c => c.id == cliente.id ? cliente : c
-  );
+  const clienteEditado = await prisma.cliente.update({
+    where: {
+      id: cliente.id,
+    },
+    data: {
+      nome: cliente.nome,
+      email: cliente.email,
+    },
+  })
 
-  try {
-    const arq = fs.writeFileSync(
-      process.cwd() + arquivo,
-      JSON.stringify(lista),
-      'utf8');
-    return true;
-  }
-  catch (e) {
-    return false;
-  }
+  return clienteEditado.id === cliente.id;
 }
 
 
-export function removerCliente(id: number): boolean {
+export async function removerCliente(id: number): Promise<boolean> {
 
-  const lista = obterClientes().filter(c => c.id != id);
+  const clienteRemovido = await prisma.cliente.delete({
+    where: {
+      id: id
+    }
+  });
 
-  try {
-    const arq = fs.writeFileSync(
-      process.cwd() + arquivo,
-      JSON.stringify(lista),
-      'utf8');
-    return true;
-  }
-  catch (e) {
-    return false;
-  }
+  return clienteRemovido.id === id;
 }
