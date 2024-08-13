@@ -24,7 +24,7 @@ export async function adicionarCliente(prevState: any, formData: FormData) {
   const cliente = parse.data;
 
   const res = await post(
-    "http://localhost:3000/cliente/api/adc",
+    "http://localhost:3000/api/cliente/adc",
     `{"id":"${cliente.id}", "nome":"${cliente.nome}", "email":"${cliente.email}"}`
   );
 
@@ -58,7 +58,7 @@ export async function editarCliente(prevState: any, formData: FormData) {
   const cliente = parse.data;
 
   const res = await post(
-    "http://localhost:3000/cliente/api/edt",
+    "http://localhost:3000/api/cliente/edt",
     `{"id":"${cliente.id}", "nome":"${cliente.nome}", "email":"${cliente.email}"}`
   );
 
@@ -74,7 +74,7 @@ export async function editarCliente(prevState: any, formData: FormData) {
 export async function removerCliente(id: number) {
 
   const res = await post(
-    "http://localhost:3000/cliente/api/rmv",
+    "http://localhost:3000/api/cliente/rmv",
     `{"id":"${id}"}`
   );
 

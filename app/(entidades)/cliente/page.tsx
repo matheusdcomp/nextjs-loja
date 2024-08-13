@@ -15,7 +15,7 @@ export default function Clientes() {
   const router = useRouter();
 
   const { data, error, isLoading } = useSWR<Cliente[]>(
-    'http://localhost:3000/cliente/api/obt',
+    'http://localhost:3000/api/cliente/obt',
     (url: string) => fetch(url).then((res => res.json()))
   );
 

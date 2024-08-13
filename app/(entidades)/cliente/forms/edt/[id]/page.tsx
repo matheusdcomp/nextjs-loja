@@ -17,7 +17,7 @@ export default function FormEdtCliente({ params }: { params: { id: number } }) {
   );
 
   const { data, error } = useSWR<Cliente>(
-    `http://localhost:3000/cliente/api/obi?id=${params.id}`,
+    `http://localhost:3000/api/cliente/obi?id=${params.id}`,
     (url: string) => fetch(url).then((res => res.json()))
   );
 
