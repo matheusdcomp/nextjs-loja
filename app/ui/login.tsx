@@ -1,17 +1,31 @@
 "use client"
-import Link from "next/link";
 import styles from "./ui.module.css";
+import { efetuarLogout } from "../(entidades)/usuario/action";
 import { useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
 
+  const router = useRouter();
   const session = useSession();
 
+
+  function cliqueLogin() {
+
+    switch (session.status) {
+
+      case "unauthenticated":
+        router.push("/usuario/forms/lgn");
+        break;
+
+      case "authenticated":
+        efetuarLogout().then(() => router.push("/"));
+    }
+  }
+
   return (
-    <div className={styles.login}>
-      <Link href="/usuario/forms/lgn">
-        {session.data ? "☺ " + session.data.user!.name : "☻ Login"}
-      </Link>
+    <div className={styles.login} onClick={cliqueLogin}>
+      {session.data ? "☺ " + session.data.user!.name : "☻ Login"}
     </div>
   );
 

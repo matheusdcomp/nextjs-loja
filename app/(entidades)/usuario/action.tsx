@@ -1,6 +1,6 @@
 "use server"
 import prisma from "@/data/prisma";
-import { signIn } from "@/app/lib/auth/auth";
+import { signIn, signOut } from "@/app/lib/auth/auth";
 import { redirect } from "next/navigation";
 
 
@@ -27,6 +27,11 @@ export async function efetuarLogin(prevState: any, formData: FormData) {
   }
 
   return { mensagem: "Não foi possível efetuar o login." };
+}
+
+export async function efetuarLogout() {
+  await signOut({ redirect: false });
+  console.log("Logout efetuado");
 }
 
 export async function adicionarUsuario(prevState: any, formData: FormData) {
