@@ -1,7 +1,5 @@
-import { PrismaClient, Cliente } from "prisma/prisma-client";
-
-const prisma = new PrismaClient();
-
+import { Cliente } from "prisma/prisma-client";
+import prisma from "@/data/prisma";
 
 export async function obterClientes(): Promise<Cliente[]> {
   return await prisma.cliente.findMany();

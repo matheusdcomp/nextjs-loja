@@ -9,6 +9,7 @@ export default function Home() {
         alt="Loja Exemplo"
         width={300}
         height={300}
+        priority
       />
     </div>
   );

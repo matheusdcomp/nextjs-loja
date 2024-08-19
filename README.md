@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Main (corresponde à Aula01)
+ - Descrição:
+  Projeto Next, Layout, Template, Page
+  
 
-## Getting Started
+Aula02
+ - Descrição
+  Componentes
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Aula03
+ - Descrição
+  Tratamento de Eventos e useState
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Aula04
+ - Descrição
+  Persistência dos dados em arquivo json e routes
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+Aula05
+ - Descrição
+  Formulário com Zod e useFormState
 
-To learn more about Next.js, take a look at the following resources:
+ - Instalar
+  mpm i zod
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Aula06
+ - Descrição
+  Persistência dos dados com Prisma e Postgres
 
-## Deploy on Vercel
+ - Instalar
+  mpm i prisma --save-dev
+  npm i @prisma/client
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ - Executar (novamente a cada alteração no schema.prisma)   
+   npx prisma migrate dev
+   npx prisma generate (somente se o anterior não tiver feito)
+   npx prisma studio (abre uma página no navegador que permite acessar o bd)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Aula07
+ - Descrição
+  Autenticação com nextauth, inclui tabela User(email,password) no BD
+
+ - Instalar
+  npm i next-auth@beta
+  npm i @auth/prisma-adapter
+  npm i --save @types/bcrypt
+
+ - Executar  
+  npx auth secret

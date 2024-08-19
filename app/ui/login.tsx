@@ -1,13 +1,19 @@
+"use client"
+import Link from "next/link";
 import styles from "./ui.module.css";
+import { useSession } from "next-auth/react";
 
 export default function Login() {
 
-  const logado = false;
+  const session = useSession();
 
   return (
     <div className={styles.login}>
-      <span className={styles.loginIcon}>{logado ? "☻" : "☺"}</span>
-      <span>{logado ? "Usuário" : "Login"}</span>
+      <Link href="/usuario/forms/lgn">
+        {session.data ? "☺ " + session.data.user!.name : "☻ Login"}
+      </Link>
     </div>
   );
+
 }
+

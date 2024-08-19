@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 15vh;
+  height: 83px;
   padding: 2rem;
 }
 
@@ -27,14 +27,13 @@
 
 .topo div:nth-child(2) {
   text-align: center;
-  width: 80%;
+  width: 75%;
 }
 
 .topo div:nth-child(3) {
   text-align: right;
-  width: 10%;
+  width: 15%;
 }
-
 
 .mainmenu {
   background-color: rgb(var(--loja-light-grey-rgb));
@@ -44,7 +43,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 3vh;
+  height: 20px;
   font-family: var(--font-mono);
   font-size: 1rem;
 }
@@ -60,7 +59,7 @@
   display: inline-block;
   text-align: center;
   width: 25%;
-  height: 3vh;
+  height: 20px;
 }
 
 .mainmenu ul li:hover {
@@ -70,7 +69,7 @@
 .centro {
   color: rgb(var(--foreground-rgb));
   width: 100%;
-  height: 77vh;
+  height: 480px;
   padding: 1rem;
 }
 
@@ -91,7 +90,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 5vh;
+  height: 25px;
   padding: 0.5rem;
   font-family: var(--font-mono);
   font-size: 1rem;

@@ -1,19 +1,15 @@
 .login {
+  font-size: 2rem;
   background-color: rgb(var(--loja-blue-rgb));
   border: 1px solid rgb(var(--loja-light-grey-rgb));
   border-radius: 25px;
-  font-size: 1.2rem;
-  height: 3rem;
-  width: 10%;
+  height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
 
-.loginIcon {
-  font-size: 3rem;
-}
 
 .formularioDiv {
   background-color: rgb(var(--loja-light-grey-rgb));
@@ -28,6 +24,7 @@
   margin-top: 1rem;
   padding: 1rem 1rem 0rem;
   text-align: center;
+  min-height: 150px;
 }
 
 .formularioForm label {
@@ -38,12 +35,19 @@
 
 .formularioForm label span {
   display: inline-block;
-  width: 5%;
+  width: 10%;
 }
 
 .formularioForm label input {
   display: inline-block;
-  width: 50%;
+  width: 40%;
+}
+
+
+.formularioForm p {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 1rem 0;
 }
 
 .formularioPainel {
@@ -52,7 +56,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 5vh;
+  height: 15px;
   width: 100%;
 }
 
@@ -74,7 +78,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 5vh;
+  height: 30px;
 }
 
 .painelCRUD button {
@@ -88,7 +92,7 @@
 
 .tabeladiv {
   overflow: scroll;
-  max-height: 30vh;
+  max-height: 150px;
 }
 
 .tabela {

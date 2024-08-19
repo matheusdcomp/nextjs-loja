@@ -1,16 +1,16 @@
 'use client'
 import styles from "@/app/ui/ui.module.css";
-import { adicionarCliente } from "@/app/(entidades)/cliente/action";
+import { adicionarUsuario } from "@/app/(entidades)/usuario/action";
 import { useFormState } from "react-dom";
 import SubmitButton from "@/app/ui/submitbutton";
 
 import Link from "next/link";
 
 
-export default function FormAdcCliente() {
+export default function FormAdcUsuario() {
 
   const [state, formAction] = useFormState(
-    adicionarCliente,
+    adicionarUsuario,
     { mensagem: "" }
   );
 
@@ -19,20 +19,11 @@ export default function FormAdcCliente() {
       <h1>Adicionar Cliente</h1>
       <form className={styles.formularioForm} action={formAction}>
         <label>
-          <span>Id:</span>
-          <input
-            type="text"
-            id="iptclienteid"
-            name="id"
-            required
-          />
-        </label>
-        <label>
           <span>Nome:</span>
           <input
             type="text"
-            id="iptclientenome"
-            name="nome"
+            id="iptusuarionome"
+            name="name"
             required
           />
         </label>
@@ -40,14 +31,23 @@ export default function FormAdcCliente() {
           <span>Email:</span>
           <input
             type="email"
-            id="iptclienteemail"
+            id="iptusuarioemail"
             name="email"
+            required
+          />
+        </label>
+        <label>
+          <span>Senha:</span>
+          <input
+            type="password"
+            id="iptusuariosenha"
+            name="password"
             required
           />
         </label>
         <div className={styles.formularioPainel}>
           <SubmitButton rotulo="Confirmar" />
-          <Link href="\cliente">
+          <Link href="/usuario/forms/lgn">
             <button type="button" >Cancelar</button>
           </Link>
         </div>

@@ -1,36 +1,21 @@
+"use client"
 import styles from "./page.module.css";
-import Image from 'next/image';
 import Link from 'next/link';
+import Topo from "./ui/topo";
 
-import Login from "./ui/login";
+export default function Template({ children }: { children: React.ReactNode }) {
 
-export default function Template({
-  children
-}: {
-  children: React.ReactNode
-}) {
   return (
     <main className={styles.main}>
 
-      <div className={styles.topo}>
-        <div>
-          <Image
-            src="/loja.png"
-            alt="Loja Exemplo"
-            width={50}
-            height={50}
-          />
-        </div>
-        <div><h1>Loja Exemplo</h1></div>
-        <Login />
-      </div>
+      <Topo />
 
       <div className={styles.mainmenu}>
         <ul>
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/cliente">Clientes</Link></li>
-          <li><Link href="/produto">Produtos</Link></li>
-          <li><Link href="venda">Vendas</Link></li>
+          <li key="home"><Link href="/">Home</Link></li>
+          <li key="cliente"><Link href="/cliente">Clientes</Link></li>
+          <li key="produto"><Link href="/produto">Produtos</Link></li>
+          <li key="venda"><Link href="/venda">Vendas</Link></li>
         </ul>
       </div>
 
@@ -41,6 +26,7 @@ export default function Template({
       <div className={styles.rodape}>
         <p>Copyrigt © Matheus Viana. Loja Exemplo</p>
       </div>
+
     </main>
   );
 }

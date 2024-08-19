@@ -70,7 +70,7 @@ export default function FormEdtCliente({ params }: { params: { id: number } }) {
         <label>
           <span>Email:</span>
           <input
-            type="text"
+            type="email"
             id="iptclienteemail"
             name="email"
             defaultValue={data.email}
@@ -78,7 +78,7 @@ export default function FormEdtCliente({ params }: { params: { id: number } }) {
           />
         </label>
         <div className={styles.formularioPainel}>
-          <SubmitButton />
+          <SubmitButton rotulo="Confirmar" />
           <Link href="\cliente">
             <button type="button" >Cancelar</button>
           </Link>
