@@ -42,12 +42,12 @@ Aula06
 
 Aula07
  - Descrição
-  Autenticação com nextauth, inclui tabela User(email,password) no BD
+  Autenticação com nextauth, inclui tabelas no BD
 
  - Instalar
   npm i next-auth@beta
   npm i @auth/prisma-adapter
-  npm i --save @types/bcrypt
+  npm i --save @types/bcrypt (não utilizei)
 
  - Executar  
   npx auth secret

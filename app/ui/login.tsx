@@ -19,13 +19,13 @@ export default function Login() {
         break;
 
       case "authenticated":
-        efetuarLogout().then(() => router.push("/"));
+        efetuarLogout().then(() => router.push("/usuario/forms/lgn"));
     }
   }
 
   return (
     <div className={styles.login} onClick={cliqueLogin}>
-      {session.data ? "☺ " + session.data.user!.name : "☻ Login"}
+      {session.status == "authenticated" ? "☺ " + session.data.user!.name : "☻ Login"}
     </div>
   );
 
